@@ -1,4 +1,9 @@
+"use client"
+import { ChatIntro } from "@/components/contentArea/ChatIntro"
+import { ChatList } from "@/components/sidebar/ChatList"
 import { Header } from "@/components/sidebar/Header"
+import { SearchItem } from "@/components/sidebar/Search"
+
 
 const Page = ()=>{
   return(
@@ -9,21 +14,13 @@ const Page = ()=>{
         {/* sidebar  */}
         <div className="w-[35%] max-w-[415px] flex flex-col border-r border-[#DDD]">
           <Header/>
-          
-          {/* search  */}
-          <div>
-            ...
-          </div>
-          {/* chatlist  */}
-          <div>
-            ...
-          </div>
+          <SearchItem/>
+          <ChatList/>
         </div>
-
 
         {/* content area  */}
         <div>
-          ...
+          <ChatIntro/>
         </div>
       </div>
     </div>
