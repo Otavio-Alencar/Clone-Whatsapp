@@ -5,17 +5,38 @@ import CloseIcon from '@mui/icons-material/Close';
 import SendIcon from '@mui/icons-material/Send';
 import MicIcon from '@mui/icons-material/Mic';
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react'
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { HeaderInfo } from './window/HeaderInfo';
 import { MessageItem } from './window/MessageItem';
 
-export const ChatWindow = ()=>{
+type Props = {
+    user: {
+        id:number,
+        avatar: string,
+        name:string
+    }
+}
+export const ChatWindow = ({user}: Props)=>{
    
 
     const [emojiOpen, setEmojiOpen] = useState(false)
     const [text,setText] = useState('')
-    const [list,setList] = useState([{},{},{}])
-
+    const [list,setList] = useState([
+        {author:123,body: 'blablabla'},
+        {author:123,body: 'blablabla'},
+        {author:1234,body: 'blablabla'},
+        {author:1234,body: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting'}
+        ])
+    
+    const body= useRef<HTMLDivElement>(null)
+    
+    useEffect(()=>{
+        if (body.current && body.current.scrollHeight > body.current.offsetHeight) {
+            body.current.scrollTop = body.current.scrollHeight - body.current.offsetHeight
+        }
+    },list)   
+    
+    
     const handleOpenEmoji = ()=>{
         setEmojiOpen(true)
     }
@@ -38,11 +59,12 @@ export const ChatWindow = ()=>{
 
 
             {/* chat body  */}
-            <div className='flex-1 overflow-y-auto bg-[#E5DDD5] bg-cover bg-top bg-[url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png")] py-[20px] px-[30px]'>
+            <div ref={body} className='flex-1 overflow-y-auto bg-[#E5DDD5] bg-cover bg-top bg-[url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png")] py-[20px] px-[30px] scrollbar-thin scrollbar-thumb-[rgba(0,0,0,0.2)] '>
                 {list.map((item,key)=>(
                     <MessageItem
                     key={key}
-                    data={item}/>
+                    data={item}
+                    user={user}/>
                 ))}
             </div>
 
