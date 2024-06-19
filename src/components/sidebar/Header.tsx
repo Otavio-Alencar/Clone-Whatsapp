@@ -2,6 +2,9 @@ import DonutLargeIcon from '@mui/icons-material/DonutLarge';
 import ChatIcon from '@mui/icons-material/Chat';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Avatar, AvatarImage } from '../ui/avatar';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu';
+import { ModeToggle } from '../toggleTheme';
+
 
 type Props = {
     user: {
@@ -28,7 +31,30 @@ export const Header = ({user,handleNewChat}: Props)=>{
                     <ChatIcon className='text-[#919191]'/>
                 </div>
                 <div className='w-[40px] h-[40px] rounded-full flex justify-center items-center cursor-pointer'>
-                    <MoreVertIcon className='text-[#919191]'/>
+
+                    <DropdownMenu>
+                        <DropdownMenuTrigger>
+                            <MoreVertIcon className='text-[#919191]'/>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            <DropdownMenuItem>Novo Grupo</DropdownMenuItem>
+
+
+
+                            <DropdownMenuItem>
+                                <ModeToggle>
+                                    tema
+                                </ModeToggle>
+                            </DropdownMenuItem>
+
+
+
+
+                            <DropdownMenuItem>Desconectar</DropdownMenuItem>
+                            <DropdownMenuSeparator/>
+                            <DropdownMenuItem>Baixar o WhatsApp para windows</DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
                 </div>
               </div>
           </header>
